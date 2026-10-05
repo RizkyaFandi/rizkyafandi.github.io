@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Fandi Portfolio</title>
+
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Google Material Symbols -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          keyframes: {
+            moveUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'move-up': 'moveUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+
+    /* Simple moving up animation when middle-column is rendered */
+    @keyframes moveUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-move-up {
+      animation: moveUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Custom subtle scrollbar for sticky left sidebar */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-white text-slate-800 flex flex-col min-h-screen antialiased selection:bg-slate-800 selection:text-white">
+
+  <!-- Shared Header Injection Container -->
+  <div id="navbar"></div>
+
+  <!-- Main Content Area -->
+  <main id="main-content" class="flex-grow pt-16">
+
+    <!-- 3-Column Fixed-Sidebar Layout Architecture -->
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-[64px] py-8">
+
+      <!-- Responsive Mobile/Tablet Control Bar (< lg) -->
+      <div
+        class="lg:hidden sticky top-16 sm:top-20 z-40 w-full mb-6 bg-slate-50/95 backdrop-blur-sm border border-slate-200 rounded-2xl p-3 sm:p-4 space-y-3 shadow-sm transition-all">
+        <div class="flex items-center justify-between gap-3 w-full">
+          <!-- Mobile Project Selector Drawer Button -->
+          <button id="mobile-project-drawer-btn" type="button"
+            class="flex-1 min-w-0 flex items-center justify-between gap-2 px-3.5 py-2.5 bg-white border border-slate-300 hover:border-slate-400 rounded-xl text-xs sm:text-sm font-medium text-slate-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-slate-900"
+            aria-expanded="false" aria-controls="mobile-project-drawer">
+            <div class="flex items-center gap-2 min-w-0 flex-1">
+              <div id="mobile-selected-icon"
+                class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-slate-100 text-slate-500">
+                <img src="./assets/nex-logo.png" alt="Nexmedis" class="w-4 h-4 object-contain" />
+              </div>
+              <span id="mobile-selected-name" class="font-semibold truncate">Nexmedis</span>
+            </div>
+            <span id="mobile-project-chevron"
+              class="material-symbols-outlined text-lg transition-transform duration-200 shrink-0">expand_more</span>
+          </button>
+
+          <!-- Mobile Table of Contents Drawer Button -->
+          <button id="mobile-toc-drawer-btn" type="button"
+            class="flex items-center gap-1.5 px-3 py-2.5 bg-white border border-slate-300 hover:border-slate-400 rounded-xl text-xs sm:text-sm font-medium text-slate-700 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-slate-900 shrink-0"
+            aria-expanded="false" aria-controls="mobile-toc-drawer">
+            <span class="material-symbols-outlined text-base">format_list_bulleted</span>
+            <span class="hidden sm:inline">Contents</span>
+            <span id="mobile-toc-count"
+              class="w-5 h-5 rounded-full bg-slate-900 text-white text-[10px] font-bold flex items-center justify-center">0</span>
+          </button>
+        </div>
+
+        <!-- Mobile Project Selector Collapsible Drawer -->
+        <div id="mobile-project-drawer"
+          class="hidden pt-2 border-t border-slate-200 space-y-1.5 max-h-[60vh] overflow-y-auto custom-scrollbar">
+          <!-- Populated by Vanilla JS controller -->
+        </div>
+
+        <!-- Mobile Table of Contents Collapsible Drawer -->
+        <div id="mobile-toc-drawer"
+          class="hidden pt-2 border-t border-slate-200 max-h-[60vh] overflow-y-auto custom-scrollbar">
+          <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">On This Page</p>
+          <nav id="mobile-toc-list" class="space-y-1 text-xs">
+            <!-- Populated dynamically by Vanilla JS scanning <h2> -->
+          </nav>
+        </div>
+      </div>
+
+      <!-- Main Grid Layout (12 Columns Desktop) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- 1. Left Column - Project Selector Menu (3 Columns / Sticky) -->
+        <aside class="hidden lg:block lg:col-span-3 h-full">
+          <div class="sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar pr-2 space-y-4">
+            <div
+              class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 pb-1 border-b border-slate-100">
+              <span class="material-symbols-outlined text-sm">view_kanban</span>
+              <span">Projects</span>
+            </div>
+
+            <!-- Vertical list of project selector buttons -->
+            <div class="space-y-1.5" role="tablist" aria-label="Project Selection">
+
+              <!-- Button 1: Nexmedis -->
+              <button type="button" data-project="nexmedis"
+                class="project-btn w-full flex items-center text-left px-3 py-2.5 rounded-xl text-sm font-semibold transition-all group bg-slate-900 text-white shadow-sm ring-1 ring-slate-900"
+                aria-selected="true">
+                <!-- Dedicated square icon slot container -->
+                <div
+                  class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-slate-100 text-slate-500 mr-2.5">
+                  <img src="./assets/nex-logo.png" alt="Nexmedis" class="w-4 h-4 object-contain"
+                    onerror="this.parentElement.innerHTML='<span class=\'material-symbols-outlined text-[16px]\'>token</span>'" />
+                </div>
+                <span class="truncate">Nexmedis</span>
+              </button>
+
+              <!-- Button 2: Nearon IoT Mobile App -->
+              <button type="button" data-project="nearon"
+                class="project-btn w-full flex items-center text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all group text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                aria-selected="false">
+                <!-- Dedicated square icon slot container -->
+                <div
+                  class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-slate-100 text-slate-500 mr-2.5">
+                  <img src="./assets/near-logo.png" alt="Nearon IoT" class="w-4 h-4 object-contain"
+                    onerror="this.parentElement.innerHTML='<span class=\'material-symbols-outlined text-[16px]\'>token</span>'" />
+                </div>
+                <span class="truncate">Nearon IoT Mobile App</span>
+              </button>
+
+              <!-- Button 3: Fleet Management System -->
+              <button type="button" data-project="fms"
+                class="project-btn w-full flex items-center text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all group text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                aria-selected="false">
+                <!-- Dedicated square icon slot container -->
+                <div
+                  class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-slate-100 text-slate-500 mr-2.5">
+                  <img src="./assets/fms-logo.png" alt="Fleet Management System" class="w-4 h-4 object-contain"
+                    onerror="this.parentElement.innerHTML='<span class=\'material-symbols-outlined text-[16px]\'>token</span>'" />
+                </div>
+                <span class="truncate">Fleet Management System</span>
+              </button>
+
+              <!-- Button 4: Madhani Plant System -->
+              <button type="button" data-project="madhani"
+                class="project-btn w-full flex items-center text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all group text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                aria-selected="false">
+                <!-- Dedicated square icon slot container -->
+                <div
+                  class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-slate-100 text-slate-500 mr-2.5">
+                  <img src="./assets/plant-logo.png" alt="Madhani Plant System" class="w-4 h-4 object-contain"
+                    onerror="this.parentElement.innerHTML='<span class=\'material-symbols-outlined text-[16px]\'>token</span>'" />
+                </div>
+                <span class="truncate">Madhani Plant System</span>
+              </button>
+
+              <!-- Button 5: Tyre Operation System -->
+              <button type="button" data-project="tos"
+                class="project-btn w-full flex items-center text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all group text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                aria-selected="false">
+                <!-- Dedicated square icon slot container -->
+                <div
+                  class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-slate-100 text-slate-500 mr-2.5">
+                  <img src="./assets/tos-logo.png" alt="Tyre Operation System" class="w-4 h-4 object-contain"
+                    onerror="this.parentElement.innerHTML='<span class=\'material-symbols-outlined text-[16px]\'>token</span>'" />
+                </div>
+                <span class="truncate">Tyre Operation System</span>
+              </button>
+
+              <!-- Button 6: Other Projects -->
+              <button type="button" data-project="other"
+                class="project-btn w-full flex items-center text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all group text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                aria-selected="false">
+                <!-- Dedicated square icon slot container -->
+                <div
+                  class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 bg-slate-100 text-slate-500 mr-2.5">
+                  <img src="./assets/other-logo-l.png" alt="Other Projects" class="w-4 h-4 object-contain"
+                    onerror="this.parentElement.innerHTML='<span class=\'material-symbols-outlined text-[16px]\'>token</span>'" />
+                </div>
+                <span class="truncate">Other Projects</span>
+              </button>
+
+            </div>
+          </div>
+        </aside>
+
+        <!-- 2. Middle Column - Main Content Target (7 Columns / Empty Container) -->
+        <div class="col-span-1 lg:col-span-7 w-full min-w-0">
+          <!-- Empty, clean container ready to receive HTML injection from external JS project files -->
+          <div id="project-content" class="w-full space-y-6"></div>
+        </div>
+
+        <!-- 3. Right Column - Table of Contents / On-Page Nav (2 Columns / Sticky) -->
+        <aside class="hidden lg:block lg:col-span-2 h-full">
+          <div class="sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar pr-2 space-y-4">
+            <div
+              class="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 pb-1 border-b border-slate-100">
+              <span class="material-symbols-outlined text-sm">format_list_bulleted</span>
+              <span>On This Page</span>
+            </div>
+            <!-- Dynamic jump-links targeting the section headings (<h2>) loaded inside #project-content -->
+            <nav id="table-of-contents" class="space-y-1 text-xs border-l-2 border-slate-200 pl-3 py-1"
+              aria-label="Table of contents">
+              <!-- Dynamically populated by projects.js -->
+            </nav>
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Injection Container -->
+  <div id="footer"></div>
+
+  <!-- Individual Project Data Files (Edit case study content in these files) -->
+  <script src="projects-data/nexmedis.js"></script>
+  <script src="projects-data/nearon.js"></script>
+  <script src="projects-data/fms.js"></script>
+  <script src="projects-data/madhani.js"></script>
+  <script src="projects-data/tos.js"></script>
+  <script src="projects-data/other.js"></script>
+
+  <!-- Projects Page Controller Vanilla JS Script -->
+  <script src="projects.js"></script>
+
+  <!-- Centralized Modular Components Script -->
+  <script src="components.js"></script>
+</body>
+
+</html>
