@@ -70,7 +70,7 @@ function renderNavbar() {
         <div class="w-full max-w-8xl mx-auto flex items-center justify-between h-full">
           
           <!-- Left Side (Brand / Logo) -->
-          <a href="index.html" class="flex items-center group">
+          <a href="about.html" class="flex items-center group">
             <!-- Square logo badge (blank container ready for image asset) -->
             <img src="./assets/logo.png" alt="logo"
               class="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden shrink-0 group-hover:border-slate-400 transition-colors" />
