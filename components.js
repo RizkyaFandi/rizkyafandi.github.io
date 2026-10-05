@@ -5,7 +5,7 @@
 
 // Navigation items definition
 const NAV_ITEMS = [
-  { label: 'About Me', href: 'about.html' },
+  { label: 'About Me', href: 'index.html' },
   { label: 'Projects', href: 'projects.html' },
 ];
 
@@ -70,7 +70,7 @@ function renderNavbar() {
         <div class="w-full max-w-8xl mx-auto flex items-center justify-between h-full">
           
           <!-- Left Side (Brand / Logo) -->
-          <a href="about.html" class="flex items-center group">
+          <a href="index.html" class="flex items-center group">
             <!-- Square logo badge (blank container ready for image asset) -->
             <img src="./assets/logo.png" alt="logo"
               class="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden shrink-0 group-hover:border-slate-400 transition-colors" />
@@ -185,7 +185,7 @@ function renderFooter() {
           <div>
             <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-4">Pages</h3>
             <ul class="space-y-2.5 text-sm">
-              <li><a href="about.html" class="text-slate-600 hover:text-slate-900 transition-colors">About Me</a></li>
+              <li><a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors">About Me</a></li>
               <li><a href="projects.html" class="text-slate-600 hover:text-slate-900 transition-colors">Projects</a></li>
             </ul>
           </div>
