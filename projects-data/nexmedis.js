@@ -252,6 +252,7 @@ window.PROJECTS_DATABASE['nexmedis'] = {
           <p class="text-sm text-slate-500 mt-1 mb-2 leading-relaxed">
           Displays the patient's medical history including previous illnesses, hereditary diseases, lifestyle, examination history, and potential health concerns.
           </p>
+          <img src="./assets/nex-medic.png" alt="Nexmedis Dashboard" class="w-full h-auto object-cover mb-2" onerror="this.parentElement.classList.add('hidden')" />
         </div>
       </div>
     </section>

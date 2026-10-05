@@ -34,7 +34,7 @@ window.PROJECTS_DATABASE['madhani'] = {
         </div>
         <div>
           <span class="block text-slate-400 font-medium">Released</span>
-          <span class="font-semibold text-slate-800">2025</span>
+          <span class="font-semibold text-slate-800">2025(Alpha)</span>
         </div>
         <div>
           <span class="block text-slate-400 font-medium">Platform</span>

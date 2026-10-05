@@ -35,7 +35,7 @@ window.PROJECTS_DATABASE['fms'] = {
         </div>
         <div>
           <span class="block text-slate-400 font-medium">First Release</span>
-          <span class="font-semibold text-slate-800">2025</span>
+          <span class="font-semibold text-slate-800">2024</span>
         </div>
         <div>
           <span class="block text-slate-400 font-medium">Platform</span>
